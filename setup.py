@@ -17,7 +17,7 @@ setup(
     author_email="moritz.eissenhauer@gmail.com",
     description="",
     packages=["py_arduino_builder"],
-    install_requires=["Jinja2"],
+    install_requires=["wget"],
     classifiers=[
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
