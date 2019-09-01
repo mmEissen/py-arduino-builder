@@ -4,7 +4,7 @@ from setuptools import setup
 
 
 def load_long_descriprion():
-    this_directory = path.abspath(path.dirname(__file__))
+    this_directory = path.dirname(path.abspath(__file__))
     with open(path.join(this_directory, "README.rst")) as readme:
         return readme.read()
 
