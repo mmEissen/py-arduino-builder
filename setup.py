@@ -10,7 +10,7 @@ def load_long_descriprion():
 
 
 setup(
-    name="Python Arduino Builder",
+    name="py-arduino-api",
     version="0.1",
     url="https://github.com/mmEissen/py-arduino-builder",
     author="Moritz Eissenhauer",
