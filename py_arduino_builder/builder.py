@@ -73,7 +73,26 @@ class ArduinoCLI:
             self.ensure_bin_dir_exists()
             tar_file = self.download_binary_tar()
             with tarfile.open(tar_file) as tar:
-                tar.extractall(self._bin_dir)
+                def is_within_directory(directory, target):
+                    
+                    abs_directory = os.path.abspath(directory)
+                    abs_target = os.path.abspath(target)
+                
+                    prefix = os.path.commonprefix([abs_directory, abs_target])
+                    
+                    return prefix == abs_directory
+                
+                def safe_extract(tar, path=".", members=None, *, numeric_owner=False):
+                
+                    for member in tar.getmembers():
+                        member_path = os.path.join(path, member.name)
+                        if not is_within_directory(path, member_path):
+                            raise Exception("Attempted Path Traversal in Tar File")
+                
+                    tar.extractall(path, members, numeric_owner=numeric_owner) 
+                    
+                
+                safe_extract(tar, self._bin_dir)
         self.run("core", "update-index")
         if self._install_cores is None:
             self._install_cores = self.core_search()
